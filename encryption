@@ -1,0 +1,34 @@
+#include <stdio.h>
+int main(){
+// Public Key Cryptography, also known as asymmetric cryptography, is a popular encryption method.
+// In this video, the text of letters will be encrypted by using the Public Key Encryption Method.
+char array[100], replace[100][100];
+int i, k;
+
+FILE *text;
+text = fopen("original-data.txt","r");  // The original data, which we will encrypt later, is stored in this file.
+
+FILE *kripto;
+kripto = fopen("key.txt","r");  // The original data is encrypted or decrypted by this file.
+
+fgets(array, sizeof(array), text);
+
+i=0;
+while(fscanf(kripto, "%s %s %s", &replace[i][0], &replace[i][1], &replace[i][2]) != EOF){
+    i++;
+}
+for(i=0; i<100; i++){
+    for(k=0; array[k]!='\0'; k++){
+        // Check if the letters in the file match the "replace" array.
+        if((array[k]== replace[i][0]) || (array[k]==replace[i][1])){
+            array[k] = replace[i][2]; // If conditions are provided, the letters are replaced with characters encrypted.
+        }
+    }
+}
+printf("Scrabled data:  ");
+puts(array);  // Here is the new text encrypted
+
+fclose(text);
+fclose(kripto);
+return 0;
+}
